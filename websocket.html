@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cliente P2P</title>
+    
+</head>
+<body >
+    <div id="formulario">
+        <input id="comando"/>
+        <button id="enviar">Enviar</button>
+    </div>
+    <div id="resultado">
+
+    </div>
+    <script>
+        /*const socket = new WebSocket('ws://irc-ws.chat.twitch.tv:80');
+        // Connection opened
+        socket.addEventListener('open', function (event) {
+            socket.send('PASS oauth:jjjj\r\nNICK kk\r\n');
+        });
+
+        // Listen for messages
+        socket.addEventListener('message', function (event) {
+            console.log('Message from server ', event.data);
+        });*/
+        const ws=new WebSocket('ws://localhost:8084');
+        let boton=document.getElementById("enviar");
+        let comando=document.getElementById("comando");
+        let resultado=document.getElementById("resultado");
+        ws.onopen=function(event){
+            resultado.innerHTML="<span class='sistema'>Conexión establecida</span><br/>";
+        }
+        
+        
+        boton.onclick=function(){
+            resultado.innerHTML=comando.value+"<br/>"+resultado.innerHTML;
+
+            ws.send(comando.value);
+            comando.value="";
+        }
+        console.log(ws.readyState);
+        console.log(document.getElementById("resultado"));
+    </script>
+</body>
+</html>
