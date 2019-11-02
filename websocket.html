@@ -38,9 +38,12 @@
         boton.onclick=function(){
             resultado.innerHTML=comando.value+"<br/>"+resultado.innerHTML;
 
-            ws.send(comando.value);
+            ws.send(comando.value+"\r\n");
             comando.value="";
         }
+        ws.onmessage = function(event) {
+            console.debug("WebSocket message received:", event);
+        };
         console.log(ws.readyState);
         console.log(document.getElementById("resultado"));
     </script>
